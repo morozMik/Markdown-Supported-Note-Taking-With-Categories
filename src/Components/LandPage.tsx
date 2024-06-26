@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import NoteList from './NoteList'
 const LandPage = () => {
   return (
     <>
@@ -8,6 +9,7 @@ const LandPage = () => {
       <Link to="/new">
         <Button type="button">Create new note</Button>
       </Link>
+      <NoteList/>
     </>
   )
 }

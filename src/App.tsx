@@ -7,6 +7,7 @@ import LandPage from "./Components/LandPage"
 import useLocalStorage from "./useLocalStorage"
 import { useMemo } from "react"
 import { v4 as uuidv4 } from 'uuid';
+import NoteList from "./Components/NoteList"
 export type Note = {
   id: string
 } & NoteData
@@ -41,17 +42,22 @@ function App() {
 }, [notes,tags])
 
   const onCreateNote = ({tags, ...data}: NoteData) => {
-    setNotes(prevNotes => {
+    setNotes( prevNotes => {
       return [...prevNotes, {...data, id: uuidv4(), tagIds: tags.map(tag => tag.id)
       }]
     })
+  }
+
+  const onAddTag = (newTag:Tag) => {
+    setTags(prev => [...prev, newTag])
   }
 
   return (
     <Container className="my-4">
       <Routes>
         <Route path="/" element={<LandPage/>}/>
-        <Route path="/new" element={<NewNote onSubmit={onCreateNote}/>}/>
+        <Route path="/new" element={<NewNote onAddTag={onAddTag} onSubmit={onCreateNote} 
+        availableTags={tags}/>}/>
         <Route path="/:id">
           <Route index element={<h1>Show</h1>}/>
           <Route path="edit" element={<h1>Edit</h1>}/>
