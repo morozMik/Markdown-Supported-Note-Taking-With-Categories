@@ -1,15 +1,13 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import NoteList from './NoteList'
-const LandPage = () => {
+
+type LandPageProps = {
+  availableTags: Tag[]
+}
+const LandPage = ({availableTags}:LandPageProps) => {
   return (
     <>
-      <h1>Heloo World</h1>
-      <Link to="/new">
-        <Button type="button">Create new note</Button>
-      </Link>
-      <NoteList/>
+      <NoteList availableTags={availableTags}/>
     </>
   )
 }
